@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>meet-overlap · 多时区会议重叠</title>
+  <meta name="description" content="选几个城市，看工作时段在哪几小时重叠。纯前端，不上传。" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <h1>meet-overlap</h1>
+      <p class="lead">选城市与工作时段，找出大家都能开会的重叠小时。全部在浏览器本地计算。</p>
+    </header>
+
+    <section class="panel" aria-labelledby="cities-h">
+      <h2 id="cities-h">城市 / 时区</h2>
+      <div class="row">
+        <label class="grow">
+          快速添加
+          <select id="preset"></select>
+        </label>
+        <button type="button" id="add-preset" class="btn">添加</button>
+      </div>
+      <ul id="city-list" class="city-list"></ul>
+      <p class="hint">至少保留 2 个城市。删除只剩一个时会禁止再删。</p>
+    </section>
+
+    <section class="panel" aria-labelledby="hours-h">
+      <h2 id="hours-h">工作时段（各城本地时间）</h2>
+      <div class="row hours">
+        <label>
+          开始
+          <input type="number" id="work-start" min="0" max="23" value="9" />
+        </label>
+        <label>
+          结束
+          <input type="number" id="work-end" min="1" max="24" value="18" />
+        </label>
+        <label>
+          参考日
+          <input type="date" id="ref-date" />
+        </label>
+      </div>
+      <p class="hint">结束时刻按「不含」处理：9–18 表示 09:00 到 17:59。</p>
+    </section>
+
+    <section class="panel" aria-labelledby="result-h">
+      <h2 id="result-h">重叠结果</h2>
+      <p id="summary" class="summary"></p>
+      <div class="legend">
+        <span><i class="swatch overlap"></i> 全员重叠</span>
+        <span><i class="swatch work"></i> 该城工作中</span>
+        <span><i class="swatch off"></i> 非工作</span>
+      </div>
+      <div class="table-scroll">
+        <table id="grid" class="grid">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div id="slots" class="slots"></div>
+    </section>
+
+    <footer>
+      <p>零依赖 · 不联网请求 · <a href="https://github.com/temptation2017/meet-overlap">源码</a></p>
+    </footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
